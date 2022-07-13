@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <!-- 配置Service -->
+    <bean id="accountService" class="com.itheima.service.impl.AccountServiceImpl">
+        <!-- set方法注入 dao -->
+        <property name="accountDao" ref="accountDao"></property>
+    </bean>
+
+    <!--配置Dao对象-->
+    <bean id="accountDao" class="com.itheima.dao.impl.AccountDaoImpl">
+        <!-- set方法注入 QueryRunner -->
+        <property name="runner" ref="runner"></property>
+    </bean>
+
+    <!--配置QueryRunner,记得配置为多例对象，以保证每次使用的dao都是新的，避免干扰-->
+    <bean id="runner" class="org.apache.commons.dbutils.QueryRunner" scope="prototype">
+        <!--构造函数注入 数据源 ，QueryRunner类的构造方法中必须有一个为QueryRunner(ds)样式的构造方法-->
+        <!-- 类似如下
+        public class QueryRunner{
+            private String ds;
+               public QueryRunner(String ds){
+                    this.ds = ds;
+               }
+           }
+        -->
+        <constructor-arg name="ds" ref="dataSource"></constructor-arg>
+    </bean>
+
+    <!-- 配置数据源 -->
+    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+        <!--set方法注入 连接数据库的必备信息-->
+        <property name="driverClass" value="com.mysql.cj.jdbc.Driver"></property>
+        <property name="jdbcUrl" value="jdbc:mysql://localhost:3306/springTest"></property>
+        <property name="user" value="root"></property>
+        <property name="password" value="root1234"></property>
+    </bean>
+</beans>
