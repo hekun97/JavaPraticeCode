@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+    <!-- 配置Service -->
+    <bean id="accountService" class="com.itheima.service.impl.AccountServiceImplPrimitive">
+        <!-- set方法注入 dao -->
+        <property name="accountDao" ref="accountDao"></property>
+        <!--修改开始1-->
+
+        <!--修改结束1-->
+    </bean>
+    <!--配置Dao对象-->
+    <bean id="accountDao" class="com.itheima.dao.impl.AccountDaoImpl">
+        <!-- set方法注入 QueryRunner -->
+        <property name="runner" ref="runner"></property>
+        <!--更换使用工具类ConnectionUtil中的数据库连接-->
+        <!--set方式注入 存入一个和本地线程绑定的数据库连接-->
+        <property name="connectionUtil" ref="connectionUtil"></property>
+    </bean>
+
+    <!--配置QueryRunner,记得配置为多例对象，以保证每次使用的dao都是新的，避免干扰造成线程安全问题-->
+    <bean id="runner" class="org.apache.commons.dbutils.QueryRunner" scope="prototype">
+        <!--构造函数注入 数据源 ，QueryRunner类的构造方法中必须有一个为QueryRunner(String ds)样式的构造方法-->
+        <!-- 类似如下
+        public class QueryRunner{
+            private String ds;
+               public QueryRunner(String ds){
+                    this.ds = ds;
+               }
+           }
+        -->
+    </bean>
+
+    <!-- 配置数据源 -->
+    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+        <!--set方法注入 连接数据库的必备信息-->
+        <property name="driverClass" value="com.mysql.cj.jdbc.Driver"></property>
+        <property name="jdbcUrl" value="jdbc:mysql://localhost:3306/springTest"></property>
+        <property name="user" value="root"></property>
+        <property name="password" value="root1234"></property>
+    </bean>
+
+    <!-- 配置存储数据库连接的工具类 -->
+    <bean id="connectionUtil" class="com.itheima.utils.ConnectionUtil">
+        <property name="dataSource" ref="dataSource"></property>
+    </bean>
+    <!-- 配置事务管理相关的工具类 -->
+    <bean id="transactionManagerUtil" class="com.itheima.utils.TransactionManagerUtil">
+        <property name="connectionUtil" ref="connectionUtil"></property>
+    </bean>
+
+    <!--配置 BeanFactory 工厂类 用于创建Service的代理对象的工厂-->
+    <bean id="beanFactory" class="com.itheima.factory.BeanFactory">
+        <!--注入未被代理的service-->
+        <property name="accountService" ref="accountService"></property>
+        <!--注入事务管理器-->
+        <property name="txManagerUtil" ref="transactionManagerUtil"></property>
+
+    </bean>
+
+    <!--配置已被代理的service proxyAccountService-->
+    <bean id="proxyAccountService" factory-bean="beanFactory" factory-method="getAccountService"></bean>
+
+</beans>
