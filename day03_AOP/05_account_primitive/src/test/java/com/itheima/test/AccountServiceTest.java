@@ -13,11 +13,11 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 public class AccountServiceTest {
     //1.获取Spring核心容器
     ClassPathXmlApplicationContext ac = new ClassPathXmlApplicationContext("bean.xml");
-    //2.根据id获取bean对象，这里获取的是业务层对象as
-    IAccountService as = (IAccountService) ac.getBean("proxyAccountService");
+    //2.根据id获取bean对象，这里获取的是被工厂类BeanFactory增强过的业务层对象proxyAccountService
+    IAccountService pas = (IAccountService) ac.getBean("proxyAccountService");
     @Test
     public void tsetTransfer(){
-        as.transfer("张三","李四",100f);
+        pas.transfer("张三","李四",100f);
     }
 
 }

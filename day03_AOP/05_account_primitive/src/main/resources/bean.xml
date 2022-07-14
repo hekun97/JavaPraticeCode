@@ -9,9 +9,10 @@
     <bean id="accountService" class="com.itheima.service.impl.AccountServiceImplPrimitive">
         <!-- set方法注入 dao -->
         <property name="accountDao" ref="accountDao"></property>
-        <!--修改开始1-->
-
-        <!--修改结束1-->
+        <!--修改开始 01-->
+        <!--删除原先使用 set方式注入管理事务的工具类 ， 因为此处的AccountServiceImplPrimitive类中不使用这个工具类，转而在工厂类BeanFactory -->
+        <!--<property name="txManagerUtil" ref="transactionManagerUtil"></property>-->
+        <!--修改结束 01-->
     </bean>
     <!--配置Dao对象-->
     <bean id="accountDao" class="com.itheima.dao.impl.AccountDaoImpl">
@@ -24,15 +25,7 @@
 
     <!--配置QueryRunner,记得配置为多例对象，以保证每次使用的dao都是新的，避免干扰造成线程安全问题-->
     <bean id="runner" class="org.apache.commons.dbutils.QueryRunner" scope="prototype">
-        <!--构造函数注入 数据源 ，QueryRunner类的构造方法中必须有一个为QueryRunner(String ds)样式的构造方法-->
-        <!-- 类似如下
-        public class QueryRunner{
-            private String ds;
-               public QueryRunner(String ds){
-                    this.ds = ds;
-               }
-           }
-        -->
+        <!--此处忘了为何不在此处引入数据源了-->
     </bean>
 
     <!-- 配置数据源 -->
@@ -48,11 +41,13 @@
     <bean id="connectionUtil" class="com.itheima.utils.ConnectionUtil">
         <property name="dataSource" ref="dataSource"></property>
     </bean>
+
     <!-- 配置事务管理相关的工具类 -->
     <bean id="transactionManagerUtil" class="com.itheima.utils.TransactionManagerUtil">
         <property name="connectionUtil" ref="connectionUtil"></property>
     </bean>
 
+    <!--修改开始 02 -->
     <!--配置 BeanFactory 工厂类 用于创建Service的代理对象的工厂-->
     <bean id="beanFactory" class="com.itheima.factory.BeanFactory">
         <!--注入未被代理的service-->
@@ -62,7 +57,8 @@
 
     </bean>
 
-    <!--配置已被代理的service proxyAccountService-->
+    <!--配置已被代理的service proxyAccountService
+    通过使用普通工厂中的方法获取工厂类BeanFactory中getAccountService()方法创建的代理对象 proxyAccountService 供表现层（这里的test包下的 AccountServiceTest类）调用-->
     <bean id="proxyAccountService" factory-bean="beanFactory" factory-method="getAccountService"></bean>
-
+    <!--修改结束 02-->
 </beans>

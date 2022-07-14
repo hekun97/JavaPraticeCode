@@ -33,7 +33,7 @@ public class BeanFactory {
      * @return 返回被增强的Service代理对象 proxyAccountService
      */
     public IAccountService getAccountService() {
-        return (IAccountService) Proxy.newProxyInstance(accountService.getClass().getClassLoader(), accountService.getClass().getInterfaces(), new InvocationHandler() {
+        IAccountService proxyAccountService = (IAccountService) Proxy.newProxyInstance(accountService.getClass().getClassLoader(), accountService.getClass().getInterfaces(), new InvocationHandler() {
 
             @Override
             public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
@@ -56,5 +56,7 @@ public class BeanFactory {
                 return rtValue;
             }
         });
+        //返回已经被代理过的service对象
+        return proxyAccountService;
     }
 }
