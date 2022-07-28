@@ -33,29 +33,31 @@ public class BeanFactory {
      * @return 返回被增强的Service代理对象 proxyAccountService
      */
     public IAccountService getAccountService() {
-        IAccountService proxyAccountService = (IAccountService) Proxy.newProxyInstance(accountService.getClass().getClassLoader(), accountService.getClass().getInterfaces(), new InvocationHandler() {
-
-            @Override
-            public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-                Object rtValue = null;
-                try {
-                    //1.开启事务
-                    txManagerUtil.beginTransaction();
-                    //2.操作数据库
-                    rtValue = method.invoke(accountService, args);
-                    //3.提交事务
-                    txManagerUtil.commitTransaction();
-                } catch (Exception e) {
-                    //4.回滚事务
-                    txManagerUtil.rollbackTransaction();
-                    e.printStackTrace();
-                } finally {
-                    //5.释放连接
-                    txManagerUtil.release();
-                }
-                return rtValue;
-            }
-        });
+        IAccountService proxyAccountService =
+                (IAccountService) Proxy.newProxyInstance(accountService.getClass().getClassLoader(),
+                        accountService.getClass().getInterfaces(), new InvocationHandler() {
+                            //增强accountService类中方法的代码
+                            @Override
+                            public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+                                Object rtValue = null;
+                                try {
+                                    //1.开启事务
+                                    txManagerUtil.beginTransaction();
+                                    //2.执行业务层的同名方法
+                                    rtValue = method.invoke(accountService, args);
+                                    //3.提交事务
+                                    txManagerUtil.commitTransaction();
+                                } catch (Exception e) {
+                                    //4.回滚事务
+                                    txManagerUtil.rollbackTransaction();
+                                    e.printStackTrace();
+                                } finally {
+                                    //5.释放连接
+                                    txManagerUtil.release();
+                                }
+                                return rtValue;
+                            }
+                        });
         //返回已经被代理过的service对象
         return proxyAccountService;
     }
