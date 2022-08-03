@@ -40,8 +40,11 @@
                         aop:before：表示前置通知，method：用于指定Logger类中哪个方法是前置通知，
 pointcut：用于指定切入点表达式，该表达式的含义指的是对业务层中哪些方法增强
 -->
-            <aop:before method="printLog"
-                        pointcut="execution(public void com.itheima.service.impl.AccountServiceImpl.saveAccount())"></aop:before>
+            <!--标准写法-->
+            <!--<aop:before method="printLog"-->
+            <!--            pointcut="execution(public void com.itheima.service.impl.AccountServiceImpl.saveAccount())"></aop:before>-->
+            <!--实际开发中切入点表达式的通常写法-->
+            <aop:before method="printLog" pointcut="execution(* com.itheima.service.impl.*.*(..))"></aop:before>
         </aop:aspect>
     </aop:config>
 </beans>
