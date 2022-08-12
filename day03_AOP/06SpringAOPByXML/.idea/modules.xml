@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/SpringAOPByXML_01/SpringAOPByXML_01.iml" filepath="$PROJECT_DIR$/SpringAOPByXML_01/SpringAOPByXML_01.iml" />
       <module fileurl="file://$PROJECT_DIR$/SpringAOPByXML_adviceType_02/SpringAOPByXML_adviceType_02.iml" filepath="$PROJECT_DIR$/SpringAOPByXML_adviceType_02/SpringAOPByXML_adviceType_02.iml" />
+      <module fileurl="file://$PROJECT_DIR$/SpringAOPByXML_aroundType_03/SpringAOPByXML_aroundType_03.iml" filepath="$PROJECT_DIR$/SpringAOPByXML_aroundType_03/SpringAOPByXML_aroundType_03.iml" />
     </modules>
   </component>
 </project>

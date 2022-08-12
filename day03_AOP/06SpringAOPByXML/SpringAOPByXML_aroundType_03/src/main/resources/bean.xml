@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--这里记得要修改为适合aop的引用信息-->
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+													 http://www.springframework.org/schema/beans/spring-beans.xsd
+													 http://www.springframework.org/schema/aop
+													 http://www.springframework.org/schema/aop/spring-aop.xsd">
+    <!-- 配置spring的IOC,把service对象配置进来-->
+    <bean id="accountService" class="com.itheima.service.impl.AccountServiceImpl"></bean>
+    <!-- 1、配置Logger类， 把通知Bean也交给spring来管理-->
+    <bean id="logger" class="com.itheima.utils.Logger"></bean>
+
+    <!--2、配置AOP-->
+    <aop:config>
+        <!--配置公用的切入点表达式 id属性用于指定表达式的唯一标识。expression属性用于指定表达式内容，必须放在切面aop:aspect标签前-->
+        <aop:pointcut id="pt1" expression="execution(* com.itheima.service.impl.*.*(..))"/>
+        <!--3、配置切面，id：是给切面提供一个唯一标识 ref：是指定通知类bean的Id-->
+        <aop:aspect id="logAdvice" ref="logger">
+            <!-- 4、配置通知的类型，并且建立通知方法和切入点方法的关联
+                                                aop:before：表示前置通知，method：用于指定Logger类中哪个方法是前置通知，
+pointcut：用于指定切入点表达式，该表达式的含义指的是对业务层中哪些方法增强
+-->
+<!--            &lt;!&ndash; 配置前置通知：在切入点方法执行之前执行&ndash;&gt;
+            <aop:before method="beforePrintLog" pointcut-ref="pt1"></aop:before>
+
+            &lt;!&ndash; 配置后置通知：在切入点方法正常执行之后值。它和异常通知永远只能执行一个&ndash;&gt;
+            <aop:after-returning method="afterReturningPrintLog" pointcut-ref="pt1"></aop:after-returning>
+
+            &lt;!&ndash; 配置异常通知：在切入点方法执行产生异常之后执行。它和后置通知永远只能执行一个&ndash;&gt;
+            <aop:after-throwing method="afterThrowingPrintLog" pointcut-ref="pt1"></aop:after-throwing>
+
+            &lt;!&ndash; 配置最终通知：无论切入点方法是否正常执行它都会在其后面执行&ndash;&gt;
+            <aop:after method="afterPrintLog" pointcut-ref="pt1"></aop:after>-->
+
+            <!--环绕通知：详细的注解请看logger类中相关方法-->
+            <aop:around method="aroundPrintLog2" pointcut-ref="pt1"></aop:around>
+
+        </aop:aspect>
+    </aop:config>
+</beans>
