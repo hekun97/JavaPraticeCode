@@ -6,13 +6,15 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="day04_01jdbctemplate_1" />
         <module name="day04_01jdbctemplate_2" />
+        <module name="day04_01jdbctemplate_1" />
+        <module name="day04_01jdbctemplate_3_dao" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="9">
       <module name="day04_01jdbctemplate_1" target="8" />
       <module name="day04_01jdbctemplate_2" target="8" />
+      <module name="day04_01jdbctemplate_3_dao" target="8" />
     </bytecodeTargetLevel>
   </component>
 </project>
