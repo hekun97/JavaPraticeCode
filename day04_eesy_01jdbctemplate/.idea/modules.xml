@@ -5,6 +5,7 @@
       <module fileurl="file://$PROJECT_DIR$/day04_01jdbctemplate_1/day04_01jdbctemplate_1.iml" filepath="$PROJECT_DIR$/day04_01jdbctemplate_1/day04_01jdbctemplate_1.iml" />
       <module fileurl="file://$PROJECT_DIR$/day04_01jdbctemplate_2/day04_01jdbctemplate_2.iml" filepath="$PROJECT_DIR$/day04_01jdbctemplate_2/day04_01jdbctemplate_2.iml" />
       <module fileurl="file://$PROJECT_DIR$/day04_01jdbctemplate_3_dao/day04_01jdbctemplate_3_dao.iml" filepath="$PROJECT_DIR$/day04_01jdbctemplate_3_dao/day04_01jdbctemplate_3_dao.iml" />
+      <module fileurl="file://$PROJECT_DIR$/day04_01jdbctemplate_4_JdbcDaoSupport/day04_01jdbctemplate_4_JdbcDaoSupport.iml" filepath="$PROJECT_DIR$/day04_01jdbctemplate_4_JdbcDaoSupport/day04_01jdbctemplate_4_JdbcDaoSupport.iml" />
     </modules>
   </component>
 </project>

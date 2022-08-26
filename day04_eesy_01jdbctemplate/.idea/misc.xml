@@ -6,6 +6,7 @@
         <option value="$PROJECT_DIR$/day04_01jdbctemplate_1/pom.xml" />
         <option value="$PROJECT_DIR$/day04_01jdbctemplate_2/pom.xml" />
         <option value="$PROJECT_DIR$/day04_01jdbctemplate_3_dao/pom.xml" />
+        <option value="$PROJECT_DIR$/day04_01jdbctemplate_4_JdbcDaoSupport/pom.xml" />
       </list>
     </option>
   </component>
