@@ -37,7 +37,7 @@ public class AccountServiceImplPrimitive implements IAccountService {
         target.setMoney(target.getMoney() + money);
         //5.更新转出账户；
         accountDao.updateAccount(source);//这里调用之前写过的更新数据库账户的方法
-        //int i = 1 / 0;
+        int i = 1 / 0;
         //6.更新转入账户。
         accountDao.updateAccount(target);
     }
