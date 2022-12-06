@@ -1,4 +1,4 @@
-package java.com.itheima.test;
+package com.itheima.test;
 
 import com.itheima.service.IAccountService;
 import org.junit.Test;
@@ -20,7 +20,6 @@ public class AccountServiceTest {
     @Test
     public  void testTransfer(){
         as.transfer("aaa","bbb",100f);
-
     }
 
 }
