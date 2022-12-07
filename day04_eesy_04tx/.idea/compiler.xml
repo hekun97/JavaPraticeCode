@@ -6,13 +6,15 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="02tx_xml" />
         <module name="01tx_environment" />
+        <module name="03tx_anno" />
+        <module name="02tx_xml" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="9">
       <module name="01tx_environment" target="8" />
       <module name="02tx_xml" target="8" />
+      <module name="03tx_anno" target="8" />
     </bytecodeTargetLevel>
   </component>
 </project>

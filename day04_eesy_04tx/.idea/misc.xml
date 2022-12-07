@@ -6,6 +6,7 @@
         <option value="$PROJECT_DIR$/01tx_environment/pom.xml" />
         <option value="$PROJECT_DIR$/../day04_eesy_01jdbctemplate/02tx_xml/pom.xml" />
         <option value="$PROJECT_DIR$/02tx_xml/pom.xml" />
+        <option value="$PROJECT_DIR$/03tx_anno/pom.xml" />
       </list>
     </option>
   </component>

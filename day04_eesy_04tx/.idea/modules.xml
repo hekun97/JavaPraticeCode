@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/01tx_environment/01tx_environment.iml" filepath="$PROJECT_DIR$/01tx_environment/01tx_environment.iml" />
       <module fileurl="file://$PROJECT_DIR$/02tx_xml/02tx_xml.iml" filepath="$PROJECT_DIR$/02tx_xml/02tx_xml.iml" />
+      <module fileurl="file://$PROJECT_DIR$/03tx_anno/03tx_anno.iml" filepath="$PROJECT_DIR$/03tx_anno/03tx_anno.iml" />
     </modules>
   </component>
 </project>
